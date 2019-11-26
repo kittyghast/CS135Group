@@ -13,6 +13,7 @@ difficulty that affects card amount
 game must allow player to choose location of card, therefore, we can use a grid/ a 2D array that randomizes the matches
 
 O = face down 
+
 example of possible grids
 
 2x2
