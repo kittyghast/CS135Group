@@ -15,6 +15,7 @@ possible workaround for not repeating items in table/ displaying items in the ta
 on backend have an array that keeps track of matches until all values in array match or are more than 0.
 
 EX: BACKEND
+
    [!][@]   [1][0]
 
    [@][!]   [0][1]
