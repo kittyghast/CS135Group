@@ -10,15 +10,17 @@ difficulty that affects card amount
 2 - 16 cards?
 3 - 32 cards?
 
-game must allow player to choose location of card, therefore, we can use a grid/ a 2D array that randomizes the matches
+possible workaround for not repeating items in table/ displaying items in the table.
 
-O = face down 
+on backend have an array that keeps track of matches until all values in array match or are more than 0.
 
-example of possible grids
+EX: BACKEND
+   [!][@]   [1][0]
 
-2x2
-_______
-| !| O|
-_______
-| O| !|
-_______
+   [@][!]   [0][1]
+   
+What is displayed to player:
+
+   [!][ ]
+   
+   [ ][!]
