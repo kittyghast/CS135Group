@@ -1,4 +1,6 @@
-The Final Project: A memory game! 
+The Final Project: A memory game!
+
+View me in RAW in order for clarification
 
 We'll need:
 
