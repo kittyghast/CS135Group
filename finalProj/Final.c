@@ -158,50 +158,173 @@ printf("Score is %d\n",score);
 }
 
 
-
+//Medium 
 void medium(int values[16],int grid[4][4]){
+    
+    //initilize vars
 	int choice1x,choice1y,choice2x,choice2y;
 	int k=0;
+	int holder=0;
+	int score=16;
+	int check[4][4] = {{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}};
+	
+	//table popolation
 	for(int i=0;i<=3;i++){
 		for(int j=0;j<=3;j++){
 		grid[i][j]=values[k];
 			k++;
-	}
-}
-	printf("[ ][ ][ ][ ]\n[ ][ ][ ][ ]\n[ ][ ][ ][ ]\n[ ][ ][ ][ ]\nEnter your coordinates from 1 to 4\n");
-	scanf("%d %d",&choice1x,&choice1y);
-	printf("Enter your coordinates from 1 to 4\n");
-	scanf("%d %d",&choice2x,&choice2y);
-		if(grid[choice1x-1][choice1y-1]==grid[choice2x-1][choice2y-1]){
-			printf("Match");
+	    }
+    }
+     
+    //game start
+	printf("[ ][ ][ ][ ]\n[ ][ ][ ][ ]\n[ ][ ][ ][ ]\n[ ][ ][ ][ ]\n");
+	
+	
+    while(holder < 16){
+	    //reset win state
+	    holder = 0;
+	    //first choice
+	    printf("Enter your coordinates from 1 to 4\n");
+	    scanf("%d %d",&choice1x,&choice1y);
+        choice1x--;
+        choice1y--;
+        //second choice
+	    printf("Enter your coordinates from 1 to 4\n");
+	    scanf("%d %d",&choice2x,&choice2y);
+	    choice2x--;
+	    choice2y--;
+	    
+	    //New page
+	    printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+	    
+	    //logic fro game display
+	    for (int i=0;i<4;i++){
+	        for (int j=0;j<4;j++){
+	            if(check[i][j] == 1){
+					printf("[%c]", grid[i][j]);
+				}
+					else if(i==(choice1x)&&j==(choice1y)){
+						printf("[%c]",grid[i][j]);
+				}
+					else if(i==(choice2x)&&j==(choice2y)){
+						printf("[%c]",grid[i][j]);
+				}
+					else{
+						printf("[ ]");
+				}
+			}
+				printf("\n");
+		}
+		
+		//match logic
+		if(grid[choice1x][choice1y]==grid[choice2x][choice2y]){
+			check[choice1x][choice1y] = 1;
+			check[choice2x][choice2y] = 1;
+			printf("Match\n");
 		}
 		else{
-			printf("No match");
+			printf("No match\n");
+			score--;
 		}
 
+        //wincheck
+        for(int i=0; i<4; i++){
+            for(int j=0; j<4; j++){
+                if(check[i][j] == 1){
+                    holder++;
+                }
+            }
+        }
+    }
+    
+    printf("Score is %d\n", score);
+    
 	return;
 }
 
+//hard mode
 void hard(int values[36],int grid[6][6]){
+
+    //declare
 	int choice1x,choice1y,choice2x,choice2y;
 	int k=0;
-	for(int i=0;i<=5;i++){
-			for(int j=0;j<=5;j++){
-			grid[i][j]=values[k];
+	int holder=0;
+	int score=36;
+	int check[6][6] = {{0,0,0,0,0,0},{0,0,0,0,0,0},{0,0,0,0,0,0},{0,0,0,0,0,0},{0,0,0,0,0,0},{0,0,0,0,0,0}};
+	
+	//populate
+	for(int i=0;i<6;i++){
+			for(int j=0;j<6;j++){
+			    grid[i][j]=values[k];
 				k++;
-			printf("Grid[%d][%d]=%c\n",i,j,grid[i][j]);
-	}
-}
-	printf("[ ][ ][ ][ ][ ][ ]\n[ ][ ][ ][ ][ ][ ]\n[ ][ ][ ][ ][ ][ ]\n[ ][ ][ ][ ][ ][ ]\n[ ][ ][ ][ ][ ][ ]\n[ ][ ][ ][ ][ ][ ]\nEnter your coordinates from 1 to 6\n");
-	scanf("%d %d",&choice1x,&choice1y);
-	printf("Enter your coordinates from 1 to 6\n");
-	scanf("%d %d",&choice2x,&choice2y);
-		if(grid[choice1x-1][choice1y-1]==grid[choice2x-1][choice2y-1]){
-			printf("Match");
-		}
-		else{
-			printf("No match");
-		}
+			    printf("Grid[%d][%d]=%c\n",i,j,grid[i][j]);
+	        }
+    }
+    
+    //game start
+	printf("[ ][ ][ ][ ][ ][ ]\n[ ][ ][ ][ ][ ][ ]\n[ ][ ][ ][ ][ ][ ]\n[ ][ ][ ][ ][ ][ ]\n[ ][ ][ ][ ][ ][ ]\n[ ][ ][ ][ ][ ][ ]\n");
+	
+	
+	while(holder<36){
+	    //reset win state
+	    holder = 0;
+	    //first choice
+	    printf("Enter your coordinates from 1 to 6\n");    
+	    scanf("%d %d",&choice1x,&choice1y);
+	    choice1x--;
+	    choice1y--;
+	    //second choice
+	    printf("Enter your coordinates from 1 to 6\n");
+	    scanf("%d %d",&choice2x,&choice2y);
+	    choice2x--;
+	    choice2y--;
+	    
+	    //New page
+	    printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+	    
+	    //game display logic
+	    for (int i=0;i<6;i++){
+	        for (int j=0;j<6;j++){
+	            if(check[i][j] == 1){
+					printf("[%c]", grid[i][j]);
+				}
+					else if(i==(choice1x)&&j==(choice1y)){
+						printf("[%c]",grid[i][j]);
+				}
+					else if(i==(choice2x)&&j==(choice2y)){
+						printf("[%c]",grid[i][j]);
+				}
+					else{
+						printf("[ ]");
+				}
+			}
+				printf("\n");
+		}	    
+	    
+	    //match logic
+	  
+
+		    if(grid[choice1x][choice1y]==grid[choice2x][choice2y]){
+		    	check[choice1x][choice1y] = 1;
+		    	check[choice2x][choice2y] = 1;
+		    	printf("Match\n");
+		    }
+		    else{
+		    	printf("No match\n");
+		    	score--;
+		    }
+		    
+		//wincheck
+		for(int i=0; i<6; i++){
+            for(int j=0; j<6; j++){
+                if(check[i][j] == 1){
+                    holder++;
+                }
+            }
+        }
+    }
+    printf("Score id %d\n",score);
+        
 	return;
 }
 
