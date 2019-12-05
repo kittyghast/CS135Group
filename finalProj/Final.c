@@ -37,18 +37,21 @@ int main(void){
 									easy(values,grid);
 
 												 }
-								if(difficulty==2){
+								else if(difficulty==2){
 									int values[16];
 									int grid[4][4];
 									randomize(difficulty,values);
 									medium(values,grid);
 												  }
-								if(difficulty==3){
+								else if(difficulty==3){
 									int values[36];
 									int grid[6][6];
 									randomize(difficulty,values);
 									hard(values,grid);
 												  }
+								else if(difficulty != 1 || difficulty != 2 || difficulty != 3){
+									printf("ERROR: INVALID OPTION\nRETURNING TO TITLE SCREEN...\n");
+								}
 							break;
 						        }
 						case 2:{
@@ -63,7 +66,7 @@ int main(void){
 							break;
 						         }
 
-					   }
+			  }
 	  }
 	  while(choice!=0);
 }
@@ -71,54 +74,90 @@ int main(void){
 	return 0;
 }
 
+
+//easy mode
 void easy(int values[4],int grid[2][2]){
+	//choice1x + 1y are first choice, choice2x + 2y
 	int choice1x,choice1y,choice2x,choice2y;
 	int k=0;
 	int holder=0;
 	int score=4;
+	int check[2][2] = {{0, 0}, {0, 0}};
 
+	//table population
 	for(int i=0;i<=1;i++){
 		for(int j=0;j<=1;j++){
-		grid[i][j]=values[k];
+			grid[i][j]=values[k];
 			k++;
+		}
 	}
-}
+
+	//game start
 	printf("[ ][ ]\n[ ][ ]\n");
-	while(holder<2){
-	printf("Enter your coordinates from 1 to 2\n");
-	scanf("%d %d",&choice1x,&choice1y);
-	printf("Enter your coordinates from 1 to 2\n");
-	scanf("%d %d",&choice2x,&choice2y);
-	printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-	for(int i=0;i<=1;i++){
+
+	while(holder < 4){ /*Improved Logic*/
+		//resets win state
+		holder = 0;
+		//First choice
+		printf("Enter your coordinates from 1 to 2\n");
+		scanf("%d %d",&choice1x,&choice1y);
+		choice1x--; /*Added this bit to clean up code so we don't have to put in choice#x-1 every other step*/
+		choice1y--;
+		
+		//Second choice
+		printf("Enter your coordinates from 1 to 2\n");
+		scanf("%d %d",&choice2x,&choice2y);
+		choice2x--;
+		choice2y--;
+		
+		//New page
+		printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+
+		//Logic for game display
+		for(int i=0;i<=1;i++){
 				for(int j=0;j<=1;j++){
-					if(i==(choice1x-1)&&j==(choice1y-1)){
+					if(check[i][j] == 1){
+						printf("[%c]", grid[i][j]);
+					}
+					else if(i==(choice1x)&&j==(choice1y)){
 						printf("[%c]",grid[i][j]);
-						}
-					else if(i==(choice2x-1)&&j==(choice2y-1)){
+					}
+					else if(i==(choice2x)&&j==(choice2y)){
 						printf("[%c]",grid[i][j]);
-						}
+					}
 					else{
 						printf("[ ]");
 					}
-					}
-					printf("\n");
-	}
-		if(grid[choice1x-1][choice1y-1]==grid[choice2x-1][choice2y-1]){
-			holder++;
-			
-	printf("match\n");
+				}
+				printf("\n");
+		}
+
+		//match logic
+		if(grid[choice1x][choice1y]==grid[choice2x][choice2y]){
+			check[choice1x][choice1y] = 1;
+			check[choice2x][choice2y] = 1;
+			printf("match\n");
 		}
 		else{
-	printf("No match\n");
-	score--;
-}
+			printf("No match\n");
+			score--;
+		}
+		//wincheck
+                for(int i=0; i<2; i++){
+                        for(int j=0; j<2; j++){
+                                if(check[i][j] == 1){
+                                        holder++;
+                                }
 
+			}
+		}
 }
 printf("Score is %d\n",score);
 
 	return;
 }
+
+
 
 void medium(int values[16],int grid[4][4]){
 	int choice1x,choice1y,choice2x,choice2y;
